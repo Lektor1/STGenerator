@@ -1,6 +1,6 @@
-from flask import Flask
+from flask import Flask, jsonify
 from flask_restful import Resource, reqparse
-import getQTMatrix
+import getQTMatrixOpt
 
 app = Flask(__name__)
 
@@ -20,14 +20,17 @@ parser.add_argument('listOfS',
                     location='json',
                     help="parameter 'listOfS' must be in your request")
 
-@app.route('/')
+
+@app.route('/', methods = ['POST'])
 def getSTMatrix():
     data = parser.parse_args()
-    matrix = getQTMatrix.setSTMatrix(data)
+    matrix = getQTMatrixOpt.setSTMatrix(data)
     if matrix:
+        print(matrix)
         return matrix, 200
     else:
         return {"error": "something went wrong :("}, 500
+
 
 if __name__ == '__main__':
     app.run()
