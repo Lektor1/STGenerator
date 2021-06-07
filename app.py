@@ -26,7 +26,6 @@ def getSTMatrix():
     data = parser.parse_args()
     matrix = getQTMatrixOpt.setSTMatrix(data)
     if matrix:
-        print(matrix)
         return matrix, 200
     else:
         return {"error": "something went wrong :("}, 500
